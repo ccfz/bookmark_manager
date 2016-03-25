@@ -12,4 +12,10 @@ feature 'Sign Up' do
     expect(page).to have_content("Passwords did not match")
     expect(current_path).to eq ('/users')
   end
+
+  scenario 'A user is not created if email is empty' do
+    expect{signup_wrong_email}.not_to change{User.count}
+    expect(page).to have_content("Please enter E-Mail")
+    expect(current_path).to eq ('/users')
+  end
 end

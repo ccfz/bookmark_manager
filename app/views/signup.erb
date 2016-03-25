@@ -2,8 +2,7 @@
 
 <form action='/users' method='post'>
   Name: <input type='text' name='name' value ='<%= @user.name %>'/>
-  E-Mail: <input name='email' type='text'  value='<%= @user.email %>' />
-  
+  E-Mail: <input name='email' type='text'  pattern= "^\w+@\w+[\.a-z]+\b" value='<%= @user.email %>' required>
   Password: <input type='text' name='password'/>
   Confirm password: <input type='text' name='password_confirmation'/>
   <input type='submit' value='Sign Up' />

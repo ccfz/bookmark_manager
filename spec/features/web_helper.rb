@@ -47,3 +47,12 @@ def signup_wrong
   fill_in(:password_confirmation, with: "qw12e")
   click_button("Sign Up")
 end
+
+def signup_wrong_email
+  visit('/')
+  fill_in(:name, with: "Sachin")
+  #fill_in(:email, with: "sachin_rocks@gmail.com")
+  fill_in(:password, with: "qw12er34")
+  fill_in(:password_confirmation, with: "qw12er34")
+  click_button("Sign Up")
+end
