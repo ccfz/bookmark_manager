@@ -13,6 +13,7 @@ class Bookmark < Sinatra::Base
 
 
   get '/' do
+    @user = User.new
     erb(:'signup')
   end
 
