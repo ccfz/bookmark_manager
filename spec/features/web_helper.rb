@@ -30,29 +30,11 @@ def add_multi_tag_link
   click_button("Submit")
 end
 
-def signup
+def signup(name=nil, email=nil, password=nil, password_confirmation=nil)
   visit('/')
-  fill_in(:name, with: "Sachin")
-  fill_in(:email, with: "sachin_rocks@gmail.com")
-  fill_in(:password, with: "qw12er34")
-  fill_in(:password_confirmation, with: "qw12er34")
-  click_button("Sign Up")
-end
-
-def signup_wrong
-    visit('/')
-  fill_in(:name, with: "Sachin")
-  fill_in(:email, with: "sachin_rocks@gmail.com")
-  fill_in(:password, with: "qw12er34")
-  fill_in(:password_confirmation, with: "qw12e")
-  click_button("Sign Up")
-end
-
-def signup_wrong_email
-  visit('/')
-  fill_in(:name, with: "Sachin")
-  #fill_in(:email, with: "sachin_rocks@gmail.com")
-  fill_in(:password, with: "qw12er34")
-  fill_in(:password_confirmation, with: "qw12er34")
+  fill_in(:name, with: name)
+  fill_in(:email, with: email)
+  fill_in(:password, with: password)
+  fill_in(:password_confirmation, with: password_confirmation)
   click_button("Sign Up")
 end
