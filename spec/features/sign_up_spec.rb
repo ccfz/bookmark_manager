@@ -9,17 +9,27 @@ feature 'Sign Up' do
 
   scenario 'A user is not created if password not confirmed' do
     expect{signup("Sachin", "sachin_rocks@gmail.com", "1234", 123)}.not_to change{User.count}
-    expect(page).to have_content("Passwords did not match")
-    expect(current_path).to eq ('/users')
+    expect(page).to have_content("Password does not match the confirmation")
+    expect(current_path).to eq ('/users/signup')
   end
 
   scenario 'A user is not created if email is empty' do
     expect{signup("Sachin", "1234", "1234")}.not_to change{User.count}
-    expect(current_path).to eq ('/users')
+    expect(current_path).to eq ('/users/signup')
   end
 
   scenario 'A user is not created if email is not valid' do
     expect{signup("Sachin", "emialhcom", "1234", "1234")}.not_to change{User.count}
-    expect(current_path).to eq ('/users')
+    expect(current_path).to eq ('/users/signup')
+    expect(page).to have_content('Email has an invalid format')
   end
+
+
+  scenario 'A user is not created if user already exists' do
+    signup("Sachin", "sachin_rocks@gmail.com", "1234", "1234")
+    expect{signup("Sachin", "sachin_rocks@gmail.com", "1234", "1234")}.not_to change{User.count}
+    expect(page).to have_content('Email is already taken')
+    expect(current_path).to eq ('/users/signup')
+  end
+
 end

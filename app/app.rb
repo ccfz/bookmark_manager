@@ -13,8 +13,7 @@ class Bookmark < Sinatra::Base
 
 
   get '/' do
-    @user = User.new
-    erb(:'signup')
+    'Welcome to Bookmark'
   end
 
   get '/links' do
@@ -45,7 +44,13 @@ class Bookmark < Sinatra::Base
     erb(:'links/index')
   end
 
-  post '/users' do
+
+  get '/users/signup' do
+    @user = User.new
+    erb(:'users/signup')
+  end
+
+  post '/users/signup' do
     @user = User.new(name: params[:name],
       email: params[:email], 
       password: params[:password],
@@ -56,8 +61,8 @@ class Bookmark < Sinatra::Base
       session[:user_id] = @user.id
       redirect '/links'
     else
-      flash.now[:notice] = "Passwords did not match"
-      erb :'signup'
+      flash.now[:errors] = @user.errors.full_messages
+      erb :'users/signup'
     end
   end
 
